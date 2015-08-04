@@ -1,8 +1,21 @@
-// DOM Manipulation
+$("button").on("click", function() {
+  $("#filtered-values").empty();
 
+  var domValues = [];
+  var results = [];
 
-/*
-1. On button click, grab the value
-2. Pass the value to a helper function to find values in arr that are in the range
-3. Append values back to DOM
-*/
+  $("#original-values li").each(function(i, li) {
+    domValues.push(+$(li).html());
+  });
+
+  var upperLimit = +this.dataset.val;
+  var lowerLimit = upperLimit - 10;
+
+  results = domValues.filter(function(num) {
+    return num <= upperLimit && num >= lowerLimit;
+  });
+
+  for (var i = 0; i < results.length; i++) {
+    $("#filtered-values").append("<li>" + results[i] + "</li>");
+  }
+});
